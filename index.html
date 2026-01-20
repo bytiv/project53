@@ -830,11 +830,6 @@
         }
 
         @media (max-width: 768px) {
-            nav .container {
-                flex-direction: column;
-                gap: 16px;
-            }
-
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 16px;
@@ -860,6 +855,24 @@
         }
 
         @media (max-width: 480px) {
+            nav {
+                padding: 12px 0;
+            }
+
+            nav .container {
+                padding: 0 16px;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+                letter-spacing: 1px;
+            }
+
+            .nav-cta {
+                padding: 8px 14px;
+                font-size: 0.75rem;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -942,7 +955,7 @@
                                     <div class="book-subtitle">Your Guide to $29+/Day</div>
                                 </div>
                                 <div class="book-icon">💰</div>
-                                <div class="book-author">2025 Edition</div>
+                                <div class="book-author">2024 Edition</div>
                             </div>
                         </div>
                     </div>
