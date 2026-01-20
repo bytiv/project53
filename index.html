@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Blueprint | Earn $29+ Per Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark: #111111;
+            --dark-card: #1a1a1a;
+            --gold: #d4af37;
+            --gold-light: #f4d03f;
+            --money-green: #00d26a;
+            --money-green-dark: #00a854;
+            --white: #ffffff;
+            --gray: #888888;
+            --light-gray: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 210, 106, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.9) 0%, var(--black) 100%);
+            z-index: -1;
+        }
+
+        .floating-money {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.05;
+            animation: float 20s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 0;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--money-green), var(--money-green-dark));
+            color: var(--black);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 210, 106, 0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0, 210, 106, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 24px;
+        }
+
+        .badge::before {
+            content: '🔥';
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 0.95;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--money-green), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--light-gray);
+            margin-bottom: 32px;
+            max-width: 480px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--money-green), var(--money-green-dark));
+            color: var(--black);
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 30px rgba(0, 210, 106, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 40px rgba(0, 210, 106, 0.6);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--white);
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* Book Visual */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .book-container {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .book {
+            width: 280px;
+            height: 380px;
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border-radius: 8px 20px 20px 8px;
+            position: relative;
+            transform: rotateY(-15deg);
+            transition: transform 0.5s ease;
+            box-shadow: 
+                -20px 20px 60px rgba(0, 0, 0, 0.6),
+                0 0 100px rgba(0, 210, 106, 0.1),
+                inset 0 0 60px rgba(212, 175, 55, 0.05);
+        }
+
+        .book:hover {
+            transform: rotateY(-5deg) translateY(-10px);
+        }
+
+        .book::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 20px;
+            background: linear-gradient(90deg, #0a0a0a, #1a1a1a);
+            border-radius: 8px 0 0 8px;
+        }
+
+        .book-cover {
+            position: absolute;
+            inset: 0;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px 20px 20px 8px;
+            background: 
+                linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, transparent 60%, rgba(0, 210, 106, 0.1) 100%);
+        }
+
+        .book-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            letter-spacing: 3px;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .book-subtitle {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 12px;
+            letter-spacing: 1px;
+        }
+
+        .book-icon {
+            font-size: 4rem;
+            text-align: center;
+            filter: drop-shadow(0 0 30px rgba(0, 210, 106, 0.5));
+        }
+
+        .book-author {
+            font-size: 0.75rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .glow-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .glow-ring:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: -20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(0, 210, 106, 0.1);
+            color: var(--money-green);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 36px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--money-green), var(--gold));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(0, 210, 106, 0.2), rgba(212, 175, 55, 0.1));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* What's Inside */
+        .whats-inside {
+            padding: 100px 0;
+            background: linear-gradient(180deg, transparent, rgba(26, 26, 26, 0.5), transparent);
+        }
+
+        .inside-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .inside-list {
+            list-style: none;
+        }
+
+        .inside-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .inside-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--money-green), var(--money-green-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+        }
+
+        .inside-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .inside-text p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 32px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            color: var(--gold);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            line-height: 1;
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: var(--light-gray);
+            margin-bottom: 24px;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--money-green), var(--gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--black);
+        }
+
+        .author-info h5 {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .author-info span {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, var(--dark-card), var(--dark));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 32px;
+            padding: 80px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 210, 106, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-price {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .original-price {
+            font-size: 1.5rem;
+            color: var(--gray);
+            text-decoration: line-through;
+        }
+
+        .current-price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--money-green);
+            letter-spacing: 2px;
+        }
+
+        .cta-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .cta-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Content Locker Container */
+        #content-locker-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #content-locker-container.active {
+            display: flex;
+        }
+
+        .locker-inner {
+            background: var(--dark-card);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-locker {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-locker:hover {
+            color: var(--white);
+        }
+
+        .locker-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .locker-subtitle {
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+
+        /* OGAds Script Container - Place your OGAds script here */
+        #ogads-locker {
+            min-height: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .urgency-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .book {
+                width: 220px;
+                height: 300px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .inside-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav .container {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .cta-box {
+                padding: 50px 24px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .book {
+                width: 180px;
+                height: 250px;
+            }
+
+            .book-title {
+                font-size: 1.6rem;
+            }
+
+            .book-icon {
+                font-size: 2.5rem;
+            }
+
+            .feature-card {
+                padding: 24px;
+            }
+
+            .glow-ring {
+                width: 250px;
+                height: 250px;
+            }
+
+            .glow-ring:nth-child(2) {
+                width: 320px;
+                height: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-gradient"></div>
+    <div class="floating-money" style="left: 10%; animation-delay: 0s;">💵</div>
+    <div class="floating-money" style="left: 30%; animation-delay: 5s;">💰</div>
+    <div class="floating-money" style="left: 50%; animation-delay: 10s;">💵</div>
+    <div class="floating-money" style="left: 70%; animation-delay: 15s;">💰</div>
+    <div class="floating-money" style="left: 90%; animation-delay: 3s;">💵</div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">CASH BLUEPRINT</div>
+            <a href="#download" class="nav-cta">Get Free Access</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="badge">Over 10,000+ Downloads</div>
+                    <h1>
+                        START EARNING<br>
+                        <span class="highlight">$29+ PER DAY</span><br>
+                        FROM HOME
+                    </h1>
+                    <p>Discover proven methods that real people are using to generate consistent income online. No experience needed – just follow the blueprint.</p>
+                    <div class="hero-buttons">
+                        <a href="#download" class="btn-primary">
+                            <span>📥</span> Download Free eBook
+                        </a>
+                        <a href="#features" class="btn-secondary">
+                            <span>📖</span> Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="book-container">
+                        <div class="glow-ring"></div>
+                        <div class="glow-ring"></div>
+                        <div class="book">
+                            <div class="book-cover">
+                                <div>
+                                    <div class="book-title">CASH<br>BLUEPRINT</div>
+                                    <div class="book-subtitle">Your Guide to $29+/Day</div>
+                                </div>
+                                <div class="book-icon">💰</div>
+                                <div class="book-author">2024 Edition</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Downloads</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$29+</div>
+                    <div class="stat-label">Daily Potential</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Methods Included</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.9★</div>
+                    <div class="stat-label">User Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">WHY THIS WORKS</div>
+                <h2 class="section-title">EVERYTHING YOU NEED TO START</h2>
+                <p class="section-subtitle">Simple, proven strategies that anyone can implement from day one</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">Quick Start Guide</h3>
+                    <p class="feature-desc">Get started in under 30 minutes with our step-by-step instructions. No prior experience or special skills required.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3 class="feature-title">15+ Proven Methods</h3>
+                    <p class="feature-desc">Diversify your income with multiple strategies. Find what works best for you and scale your earnings.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Work From Anywhere</h3>
+                    <p class="feature-desc">All methods can be done from your phone or laptop. Work from home, coffee shops, or while traveling.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Beginner Friendly</h3>
+                    <p class="feature-desc">Written in plain language with screenshots and examples. Perfect for complete beginners.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Fast Results</h3>
+                    <p class="feature-desc">Many users see their first earnings within the first week. Start seeing results quickly.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">Regular Updates</h3>
+                    <p class="feature-desc">Get access to updated methods as new opportunities emerge. Stay ahead of the curve.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Inside -->
+    <section class="whats-inside">
+        <div class="container">
+            <div class="inside-content">
+                <div>
+                    <div class="section-tag">WHAT'S INSIDE</div>
+                    <h2 class="section-title">YOUR COMPLETE<br>MONEY-MAKING TOOLKIT</h2>
+                    <p style="color: var(--gray); margin-top: 16px;">Everything organized and ready to implement immediately.</p>
+                </div>
+                <ul class="inside-list">
+                    <li>
+                        <div class="check-icon">✓</div>
+                        <div class="inside-text">
+                            <h4>Chapter 1: Foundation Setup</h4>
+                            <p>Essential accounts and tools you'll need to get started</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="check-icon">✓</div>
+                        <div class="inside-text">
+                            <h4>Chapter 2: Quick Win Methods</h4>
+                            <p>Start earning within hours with these simple techniques</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="check-icon">✓</div>
+                        <div class="inside-text">
+                            <h4>Chapter 3: Scaling Strategies</h4>
+                            <p>Turn $29/day into $50, $100, or more with these tips</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="check-icon">✓</div>
+                        <div class="inside-text">
+                            <h4>Chapter 4: Automation Secrets</h4>
+                            <p>Set up passive income streams that work while you sleep</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="check-icon">✓</div>
+                        <div class="inside-text">
+                            <h4>Bonus: Resource Library</h4>
+                            <p>Links, tools, and templates to accelerate your success</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">SUCCESS STORIES</div>
+                <h2 class="section-title">WHAT PEOPLE ARE SAYING</h2>
+                <p class="section-subtitle">Real results from real people just like you</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"I was skeptical at first, but the methods actually work! Made my first $30 within the first week of trying. Now I'm consistently earning extra income every day."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JM</div>
+                        <div class="author-info">
+                            <h5>Jake M.</h5>
+                            <span>College Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Finally a guide that's actually easy to follow! The step-by-step approach made it simple to understand. I've already recommended it to all my friends."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SA</div>
+                        <div class="author-info">
+                            <h5>Sarah A.</h5>
+                            <span>Freelancer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"The best part is I can do this from my phone during my commute. It's become a nice side income that adds up quickly. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MT</div>
+                        <div class="author-info">
+                            <h5>Mike T.</h5>
+                            <span>Remote Worker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="download">
+        <div class="container">
+            <div class="cta-box">
+                <div class="cta-content">
+                    <div class="cta-price">
+                        <span class="original-price">$47</span>
+                        <span class="current-price">FREE TODAY</span>
+                    </div>
+                    <h2 class="cta-title">READY TO START EARNING?</h2>
+                    <p class="cta-subtitle">Get instant access to the complete Cash Blueprint and start your journey to earning $29+ per day.</p>
+                    <button class="btn-primary" id="download-btn" onclick="showContentLocker()">
+                        <span>📥</span> Get Your Free Copy Now
+                    </button>
+                    <div class="urgency-banner">
+                        <span>⏰</span> Limited Time: Free access won't last forever
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Locker Modal -->
+    <div id="content-locker-container">
+        <div class="locker-inner">
+            <button class="close-locker" onclick="hideContentLocker()">×</button>
+            <h3 class="locker-title">UNLOCK YOUR DOWNLOAD</h3>
+            <p class="locker-subtitle">Complete one quick offer below to get instant access</p>
+            
+            <!-- OGAds Content Locker Container -->
+            <!-- Place your OGAds script/iframe inside this div -->
+            <div id="ogads-locker">
+                <!-- 
+                =====================================================
+                OGADS INTEGRATION INSTRUCTIONS
+                =====================================================
+                
+                1. Log in to your OGAds dashboard
+                2. Create a new content locker
+                3. Configure your locker settings (offer count, categories, etc.)
+                4. Copy the provided embed script
+                5. Paste the script below, replacing this comment
+                
+                Example OGAds script format:
+                <script type="text/javascript" src="//www.yourlockerdomain.com/locker.js?id=YOUR_LOCKER_ID"></script>
+                
+                =====================================================
+                -->
+                <p>OGAds locker will appear here</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2024 Cash Blueprint. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Content Locker Functions
+        function showContentLocker() {
+            document.getElementById('content-locker-container').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Track click event (optional analytics)
+            console.log('Content locker triggered');
+            
+            // If using OGAds callback for successful completion:
+            // window.ogadsCallback = function() {
+            //     hideContentLocker();
+            //     startDownload();
+            // };
+        }
+
+        function hideContentLocker() {
+            document.getElementById('content-locker-container').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close locker when clicking outside
+        document.getElementById('content-locker-container').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideContentLocker();
+            }
+        });
+
+        // Close locker with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideContentLocker();
+            }
+        });
+
+        // Download function (called after locker completion)
+        function startDownload() {
+            // Replace with your actual eBook download URL
+            const downloadUrl = 'your-ebook-file.pdf';
+            
+            // Create temporary link and trigger download
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = 'Cash-Blueprint-eBook.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Optional: Show thank you message
+            alert('Thank you! Your download will begin shortly.');
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to nav
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 10, 0.9)';
+            }
+        });
+
+        // Optional: Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .testimonial-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
