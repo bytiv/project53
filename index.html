@@ -7,6 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- OGAds Content Locker Script -->
+    <script type="text/javascript" id="ogjs" src="https://applocked.store/cl/js/veemo9"></script>
     <style>
         :root {
             --black: #0a0a0a;
@@ -676,76 +679,6 @@
             margin-right: auto;
         }
 
-        /* Content Locker Container */
-        #content-locker-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        #content-locker-container.active {
-            display: flex;
-        }
-
-        .locker-inner {
-            background: var(--dark-card);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 24px;
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-        }
-
-        .close-locker {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: none;
-            border: none;
-            color: var(--gray);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close-locker:hover {
-            color: var(--white);
-        }
-
-        .locker-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 12px;
-            letter-spacing: 2px;
-        }
-
-        .locker-subtitle {
-            color: var(--gray);
-            margin-bottom: 24px;
-        }
-
-        /* OGAds Script Container - Place your OGAds script here */
-        #ogads-locker {
-            min-height: 300px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
         .urgency-banner {
             display: flex;
             align-items: center;
@@ -1149,36 +1082,7 @@
         </div>
     </section>
 
-    <!-- Content Locker Modal -->
-    <div id="content-locker-container">
-        <div class="locker-inner">
-            <button class="close-locker" onclick="hideContentLocker()">×</button>
-            <h3 class="locker-title">UNLOCK YOUR DOWNLOAD</h3>
-            <p class="locker-subtitle">Complete one quick offer below to get instant access</p>
-            
-            <!-- OGAds Content Locker Container -->
-            <!-- Place your OGAds script/iframe inside this div -->
-            <div id="ogads-locker">
-                <!-- 
-                =====================================================
-                OGADS INTEGRATION INSTRUCTIONS
-                =====================================================
-                
-                1. Log in to your OGAds dashboard
-                2. Create a new content locker
-                3. Configure your locker settings (offer count, categories, etc.)
-                4. Copy the provided embed script
-                5. Paste the script below, replacing this comment
-                
-                Example OGAds script format:
-                <script type="text/javascript" src="//www.yourlockerdomain.com/locker.js?id=YOUR_LOCKER_ID"></script>
-                
-                =====================================================
-                -->
-                <p>OGAds locker will appear here</p>
-            </div>
-        </div>
-    </div>
+    <!-- OGAds locker is triggered via og_load() and creates its own overlay -->
 
     <!-- Footer -->
     <footer>
@@ -1194,55 +1098,15 @@
 
     <!-- JavaScript -->
     <script>
-        // Content Locker Functions
+        // Trigger the OGAds locker when download button is clicked
+        // After user completes an offer, OGAds will redirect them to the PDF automatically
         function showContentLocker() {
-            document.getElementById('content-locker-container').classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // Track click event (optional analytics)
-            console.log('Content locker triggered');
-            
-            // If using OGAds callback for successful completion:
-            // window.ogadsCallback = function() {
-            //     hideContentLocker();
-            //     startDownload();
-            // };
-        }
-
-        function hideContentLocker() {
-            document.getElementById('content-locker-container').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close locker when clicking outside
-        document.getElementById('content-locker-container').addEventListener('click', function(e) {
-            if (e.target === this) {
-                hideContentLocker();
+            if (typeof og_load === 'function') {
+                og_load();
+            } else {
+                console.error('OGAds script not loaded yet');
+                alert('Please wait a moment and try again.');
             }
-        });
-
-        // Close locker with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                hideContentLocker();
-            }
-        });
-
-        // Download function (called after locker completion)
-        function startDownload() {
-            // Replace with your actual eBook download URL
-            const downloadUrl = 'your-ebook-file.pdf';
-            
-            // Create temporary link and trigger download
-            const link = document.createElement('a');
-            link.href = downloadUrl;
-            link.download = 'Cash-Blueprint-eBook.pdf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            // Optional: Show thank you message
-            alert('Thank you! Your download will begin shortly.');
         }
 
         // Smooth scroll for anchor links
@@ -1269,7 +1133,7 @@
             }
         });
 
-        // Optional: Add animation on scroll
+        // Add animation on scroll for cards
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
